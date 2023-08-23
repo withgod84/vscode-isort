@@ -174,12 +174,12 @@ export async function textEditRunner(
         let parts: string[] = [];
         let args: string[] = [];
 
-        if (textDocument.isDirty || textDocument.isUntitled) {
+        if (textDocument.isUntitled) {
             parts = getExecutablePathWithArgs(settings, ['-']);
             args = parts.slice(1).concat('--filename', textDocument.uri.fsPath);
         } else {
             parts = getExecutablePathWithArgs(settings);
-            args = parts.slice(1).concat('--stdout', textDocument.uri.fsPath);
+            args = parts.slice(1).concat(textDocument.uri.fsPath);
         }
         const newEnv = getUpdatedEnvVariables(settings);
 
